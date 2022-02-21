@@ -1,0 +1,66 @@
+
+
+[TOC]
+
+
+
+
+
+## Helmet
+
+### confについて
+
+すべてのヘルメット情報全体では、0.8と0.0付近に多く分布している。
+
+
+
+```Python3
+sns.histplot(helmets["conf"])
+```
+
+![image-20210922015307261](/home/ryuichi/.config/Typora/typora-user-images/image-20210922015307261.png)
+
+
+
+・Conf 高: 自身を持って推定
+
+・Conf 低: 推定に自身がない。
+
+
+
+また、各ビデオフレームごと、confiが0.6以上となる割合の分布が下記のようになるのだが、これを見る限り、各フレームで３割程度しか自身を持ってヘルメットの位置を推定できていないフレームも存在する。
+
+
+
+![image-20210922015945970](/home/ryuichi/.config/Typora/typora-user-images/image-20210922015945970.png)
+
+
+
+また、映像ごとに分布させてみたが、映像全体でも4割しか自身を持って推定できていないこともあるらしい。
+
+![image-20210922020137902](/home/ryuichi/.config/Typora/typora-user-images/image-20210922020137902.png)
+
+
+
+
+
+```Python
+sns.histplot(EndZone["conf"],bins=100,color="red",legend=True)
+sns.histplot(Sideline["conf"],bins=100,color="white",legend=True)
+```
+
+
+
+![image-20210922020828407](/home/ryuichi/.config/Typora/typora-user-images/image-20210922020828407.png)
+
+EndZoneのほうが、Sidelineより、全体的なconfの値が高い。
+
+
+
+
+
+
+
+## trackingに関して
+
+a

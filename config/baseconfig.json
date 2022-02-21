@@ -1,0 +1,12 @@
+{
+	"experiments":{
+		"n_debug_samples":1,
+		"random_state":42,
+		"CONF_THRE":0.3,
+		"max_iter":1000,
+		"DIG_STEP":3,
+		"DIG_MAX":30		
+	},
+    "base_dir":"/work/data/input/nfl-health-and-safety-helmet-assignment"
+
+}

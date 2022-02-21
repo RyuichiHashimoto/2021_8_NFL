@@ -1,0 +1,48 @@
+version: '3'
+
+networks:
+ kaggle_network:
+  name: kaggle_network
+  driver: bridge
+  ipam:
+   driver: default
+   config:
+     - subnet: 192.168.100.0/24
+
+services:
+  pythonscript:
+    build:
+      context: .
+      dockerfile: Dockerfile_kaggle
+
+    container_name: Kaggle
+    volumes:
+      - /home/ryuichi/.bashrc:/root/.bashrc:ro
+      - /home/ryuichi/.vimrc:/root/.vimrc:ro
+      - /home/ryuichi/.bashrc:/home/jupyter/.bashrc:ro
+      - /home/ryuichi/.vimrc:/root/vimrc:ro
+      - /home/ryuichi/.ssh:/root/.ssh:ro
+#      - /home/ryuichi/.kaggle/kaggle.json:/home/jupyter/.kaggle/kaggle.json:ro
+      - /home/ryuichi/kaggle/2021_08_NFL:/work            
+#      - /etc/passwd:/etc/passwd:ro
+#      - /etc/group:/etc/group:ro
+    working_dir: /work  
+    user: 1000:1000
+    security_opt:
+      - seccomp:unconfined
+    ports:
+      - 9000:8888
+    command: jupyter notebook --ip=0.0.0.0 --allow-root --no-browser
+
+    environment:
+       PYTHONPATH: "/work/src"
+       TZ: Asia/Tokyo
+       
+       
+    runtime: nvidia
+       
+    networks:
+     kaggle_network:
+      ipv4_address: 192.168.100.101
+
+
